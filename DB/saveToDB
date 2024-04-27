@@ -1,0 +1,11 @@
+const mongoose = require('mongoose');
+const Worker = require('./workerSchema');
+
+
+
+module.exports = {
+    saveNewDataToDB: function (data) {
+        const dataToSave = new Worker(data)
+        dataToSave.save().then(console.log("data Saved"));
+    }
+}

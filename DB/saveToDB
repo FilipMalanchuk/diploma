@@ -6,6 +6,6 @@ const Worker = require('./workerSchema');
 module.exports = {
     saveNewDataToDB: function (data) {
         const dataToSave = new Worker(data)
-        dataToSave.save().then(console.log("data Saved"));
+        dataToSave.save().then(console.log("new data recieved")).catch(err => console.log("caught an error \n" + err));
     }
 }

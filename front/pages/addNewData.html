@@ -7,10 +7,53 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>addnew</h1>
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav">
+                <a href="displayData.html" class="display">Переглянути дані</a>
+            </div><!-- end of nav -->
+            <div class="logMenu">
+                <div class="logged">
+                    <p class="nameLogged"></p>
+                    <a href="" class="exit"></a>
+                </div>  <!-- end of logged --> 
+            </div><!-- end of logMenu -->
+        </div><!-- end of header-------------------------------- -->
+
+        <div class="main">
+            <h3 class="addNewText">Додавання нових даних</h3>
+            <div class="formToAddNewData">
+                <div class="textInputs">
+                    <div class="name"><span>Ім'я</span><input type="text"></div>
+                    <div class="surname"><span>Прізвище</span><input type="text"></div>
+                    <div class="patronymic"><span>По батькові</span><input type="text"></div>
+                    <div class="jobTitle"><span>Посада</span><input type="text"></div>
+                    <div class="phoneNumber"><span>Телефон</span><input type="text"></div>
+                    <div class="email"><span>e-mail</span><input type="text"></div>
+                    <div class="payment"><span>Зарплата</span><input type="text"></div>
+                    <div class="dateOfJobStart"><span>Дата прийняття на роботу</span><input type="text"></div>
+                    <div class="address"><span>Адреса</span><input type="text"></div>
+                </div><!-- end of textInputs -->
+                <div class="photoAndMixedInputs">
+                    <div class="photo"><span>Фото</span><input type="file" accept="image/png, image/jpeg"></div>
+                    <div class="additional"><span>Додаткові дані</span><input type="textarea"></div>
+                </div><!-- end of photoAndMixedInputs -->
+            </div><!-- end of formToAddNewData -->
+            <br>
+            <div id="sendFormButton" style="border:2px red solid">Додати</div>
+            <canvas id="canvas"></canvas>
+        </div> <!-- end of main -->
+    </div> <!-- end of wrapper -->
     
-    <input type="text" id="name">
-    <p id="submit" style="background-color: red;">click</p>
+    
+    
+    
+    
+    
+    
+    
+    <!-- <input type="text" id="name">
+    <p id="submit" style="background-color: red;">click</p> -->
 
 
     <script src="../js/addNewData.js"></script>

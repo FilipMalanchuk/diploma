@@ -6,7 +6,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const DBconnect = require("./DB/DBconnect");
 const bodyParser = require("body-parser");
-const saveToDB = require("./DB/saveToDB")
+const saveToDB = require("./DB/saveToDB");
+const getData = require("./DB/getDataFromDB");
 
 
 // переменные
@@ -62,6 +63,15 @@ app.get(['/','/index.html'],async (request,response) => {
   app.post(['/addingNewData'],async (request,response) => {
     console.log(request.body)
     saveToDB.saveNewDataToDB(request.body)
+  });
+
+  // получаем запрос на вывод данных
+  app.get(['/showData'],async (request,response) => {
+    try {
+      response.status(200).json(await getData.getAllData());
+    } catch (error) {
+      response.status(500).json({error:"error, data not recieved"})
+    }
   });
 
 

@@ -8,7 +8,7 @@ module.exports = {
         return await Worker.find({})
         .then((res)=> {
             let array = []
-           res.forEach(item => array.push(Buffer.from(res[0].photo,'base64').toString('utf-8')))
+           res.forEach(item => array.push(Buffer.from(item.photo,'base64').toString('utf-8')))
            
            res.push({imagesBase64:array}); // добавляю в ответ на фронт массив с фотками в формате base64 тк на фронт части нельзя переделать из buffer 
                                         

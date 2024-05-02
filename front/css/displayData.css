@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #f9ffea;
+    font-size: 20px;
+}
+.wrapper {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+/* start of header */
+.header {
+    background-color: #e9ffb2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.nav a {
+    text-decoration: none;
+    color:black;
+    padding: 5px;
+}
+.nav a:hover {
+    color: #e9ffb2 ;
+    background-color: #acd052;
+}
+.logMenu p {
+    padding: 5px;
+    display: flex;
+}
+.header .decorate {
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+/* end of header */
+/* start of search bar */
+
+.searchBar {
+    background-color: #e9ffb2;
+    display: flex;
+    padding: 5px 15px;
+    margin-top: 5px;
+    min-height: 50px;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.textSearch,
+.moneySearch {
+    display: flex;
+    margin-right:50px;
+}
+.textSearch > *,
+.moneySearch > * {
+    margin-right:15px;
+}
+.searchBar > div:last-of-type{
+    margin-left: auto;
+    padding:5px;
+}
+.searchBar .decorate {
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+.searchButton {
+    cursor: pointer;
+}
+.searchButton:hover {
+    color: #e9ffb2 ;
+    background-color: #acd052;
+}
+/* end of of search bar */
+
+/* start of data */
+#data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#data .hidden {
+    display: none;
+}
+.dataItem {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 1%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #ededed;
+    position: relative;
+    transition: 0s;
+}
+#data .dataItem .photo {
+    width: 210px;
+    height: 280px;
+    background: 50% 50% no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+}
+.dataItem > * {
+    padding-top: 10px;
+}
+.dataItem .wholeName {
+    text-align: center;
+}
+.dataItem .jobTitle {
+    
+}
+.dataItem .expand {
+    background-image: url('../images/expand.256x256.png');
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    right: 5px;
+}
+.dataItem .close{
+    background-image: url('../images/close.256x256.png');
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    right: 5px;
+}
+.dataItem.parentExpanded {
+    width:100%;
+    max-width: 1280px;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    transition: 0.5s;
+}

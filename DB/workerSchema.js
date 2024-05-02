@@ -42,7 +42,7 @@ const workerSchema = new Schema({
     },
     photo : {
         type: Buffer,
-        required: false
+        required: true
     },
     additional : [Schema.Types.Mixed]
 

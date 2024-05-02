@@ -3,12 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/displayData.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>displayData</h1>
-    <img src="https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg" alt="" class="imgToTest">
+    <div class="wrapper">
+        <div class="header">
+            <div class="nav">
+                <a href="addNewData.html" class="display decorate">Додати нові дані +</a>
+            </div><!-- end of nav -->
+            <div class="logMenu">
+                <div class="logged">
+                    <p class="nameLogged decorate">Адмін</p>
+                    <a href="" class="exit"></a>
+                </div>  <!-- end of logged --> 
+            </div><!-- end of logMenu -->
+        </div><!-- end of header-------------------------------- -->
+        <div class="searchBar">
+            <div class="textSearch">
+                <p class="searchText">Ім'я/Посада:</p> 
+                <input type="text" class="textInput">
+            </div>
+            <div class="moneySearch">
+                <div class="searchText">Зарплата від:</div>
+                <input type="text" class="moneyInputFirst">
+                <div class="searchText">до:</div>
+                <input type="text" class="moneyInputSecond">
+            </div>
+            <div class="searchButton decorate">Шукати</div>
+        </div>
 
+        <div class="main">
+            <div id="data"></div>  
+        </div> <!-- end of main -->
+    </div> <!-- end of wrapper -->
     <script src="../js/displayData.js" defer></script>
 </body>
 </html>

@@ -14,8 +14,8 @@ document.querySelector(".photo input").onchange = function() {
 // проверка на заполнение обезательных данных
 function checkAllInputs(){
     let dataGood = true;
-    let inputsNames = ['name','surname','patronymic','jobTitle','phoneNumber','payment','dateOfJobStart']
-    document.querySelector(".name input").value
+    let inputsNames = ['name','surname','patronymic','jobTitle','phoneNumber','payment','dateOfJobStart','photo']
+    
     inputsNames.forEach((item) => {
         if (document.querySelector(`.${item} input`).value == "") {
             document.querySelector(`.${item}`).style.border = "red solid 2px"
@@ -24,6 +24,12 @@ function checkAllInputs(){
             document.querySelector(`.${item}`).style.border = "red solid 0px"
         }
     })
+    if (!isnum(document.querySelector(".payment input").value)){
+        document.querySelector(`.payment`).style.border = "red solid 2px"
+        dataGood = false;
+    } else {
+        document.querySelector(`.payment`).style.border = "red solid 0px"
+    }
     return dataGood
 
 }
@@ -75,4 +81,5 @@ function sendData (data) {
         body : JSON.stringify(data)
     });
 }
-
+// проверка на числа
+function isnum (val){return /^\d+$/.test(val);} 

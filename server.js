@@ -8,6 +8,7 @@ const DBconnect = require("./DB/DBconnect");
 const bodyParser = require("body-parser");
 const saveToDB = require("./DB/saveToDB");
 const getData = require("./DB/getDataFromDB");
+const update = require("./DB/changeData")
 
 
 // переменные
@@ -63,6 +64,15 @@ app.get(['/','/index.html'],async (request,response) => {
   app.post(['/addingNewData'],async (request,response) => {
     console.log(request.body)
     saveToDB.saveNewDataToDB(request.body)
+  });
+  // получаем пост запрос с обновлением существующей записи
+  app.post(['/changingData'],async (request,response) => {
+    let idToSend = request.body._id
+    let withoutID = request.body
+    delete withoutID._id
+    update.update(idToSend,withoutID)
+    response.status(200).json({result:"changed"})
+   
   });
 
   // получаем запрос на вывод данных

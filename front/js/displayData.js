@@ -22,7 +22,7 @@ function addElements(data){
     for (let i = 0;i<data.length - 1;i++){
         let d = data[i];
         strToAdd+=`<div class="dataItem">\n` //начало
-        strToAdd+=`<span class="id" hidden>${d._id}</span>\n`
+        strToAdd+=`<span class="id hidden" hidden>${d._id}</span>\n`
         //strToAdd+=`<img src="${data[data.length-1].imagesBase64[i]}" alt="" class="photo">\n`
         strToAdd+=`<div class="photo" style="background-image: url('${data[data.length-1].imagesBase64[i]}');"></div>`
         strToAdd+=`<p class="wholeName">
@@ -120,18 +120,18 @@ function swapToInputs (parent,target) {
     idOfChange = id;
     let d = dataFromServer.find(item => item._id == id);
     let inputs = `<div class="textInputs">
-    <div class="name"><span>Ім'я</span><input type="text" value="${d.name}"></div>
-    <div class="surname"><span>Прізвище</span><input type="text" value="${d.surname}"></div>
-    <div class="patronymic"><span>По батькові</span><input type="text" value="${d.patronymic}"></div>
-    <div class="jobTitle"><span>Посада</span><input type="text" value="${d.jobTitle}"></div>
-    <div class="phoneNumber"><span>Телефон</span><input type="text" value="${d.phoneNumber}"></div>
-    <div class="email"><span>e-mail</span><input type="text" value="${d.email}"></div>
-    <div class="payment"><span>Зарплата</span><input type="text" value="${d.payment}"></div>
-    <div class="dateOfJobStart"><span>Дата прийняття на роботу</span><input type="text" value="${d.dateOfJobStart}"></div>
-    <div class="address"><span>Адреса</span><input type="text" value="${d.address}"></div>
-    <div class="photo changingPhoto"><span>Фото</span><input type="file" accept="image/png, image/jpeg"><input type="checkbox" class="changePhoto"></div>
-    <div class="additional"><span>Додаткові дані</span><input type="textarea" value="${d.additional}"></div>`;
-    inputs+="<span class='save'></span> <span class='cancel'>"
+    <div class="name"><span>Ім'я</span> <input type="text" value="${d.name}"></div>
+    <div class="surname"><span>Прізвище</span> <input type="text" value="${d.surname}"></div>
+    <div class="patronymic"><span>По батькові</span> <input type="text" value="${d.patronymic}"></div>
+    <div class="jobTitle"><span>Посада</span> <input type="text" value="${d.jobTitle}"></div>
+    <div class="phoneNumber"><span>Телефон</span> <input type="text" value="${d.phoneNumber}"></div>
+    <div class="email"><span>e-mail</span> <input type="text" value="${d.email}"></div>
+    <div class="payment"><span>Зарплата</span> <input type="text" value="${d.payment}"></div>
+    <div class="dateOfJobStart"><span>Дата прийняття на роботу</span> <input type="text" value="${d.dateOfJobStart}"></div>
+    <div class="address"><span>Адреса</span> <input type="text" value="${d.address}"></div>
+    <div class="photo changingPhoto"><span>Фото</span> <input type="file" accept="image/png, image/jpeg"> <input type="checkbox" class="changePhoto"></div>
+    <div class="additional"><span>Додаткові дані</span> <input type="textarea" value="${d.additional}"></div>`;
+    inputs+="<span class='save'>Зберігти</span> <span class='cancel'>Відмінити</span>"
     
     parent.innerHTML = inputs
     parent.querySelector(".save").addEventListener('click',(event) => saveNewData(parent,d,id))
@@ -156,6 +156,7 @@ function saveNewData(parent, elemFromDataServer,id){
 function cancel(parent){
     console.log("cancel")
     parent.classList.remove("parentExpanded");
+    addElements(dataFromServer);
 }
 
 function isnum (val){return /^\d+$/.test(val);} 

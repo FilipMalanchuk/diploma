@@ -10,6 +10,7 @@ body {
 .wrapper {
     width: 1280px;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 /* start of header */
@@ -88,9 +89,6 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-#data .hidden {
-    display: none;
-}
 .dataItem {
     width: 18%;
     display: flex;
@@ -142,12 +140,55 @@ body {
 .dataItem.parentExpanded {
     width:100%;
     max-width: 1280px;
-    height: 100vh;
+    height: 600px;
     position: absolute;
     z-index: 1;
     transition: 0.5s;
-
+    font-size:24px;
+    background-color: #e9ffb2;
 }
+
+
+
+#data .dataItem .photo.changingPhoto {
+    height: auto;
+    width: auto;
+    border-radius: 0;
+}
+#data .dataItem .textInputs {
+    width: 100%;
+    height: 100%;
+}
+.textInputs span {
+    display: inline-block;
+    width:270px;
+    text-align: right;
+}
+.textInputs div {
+    padding: 5px;
+}
+.textInputs input[type="text"],
+.textInputs input[type="textarea"]{
+    padding:5px;
+    border:none;
+    border-radius: 10px;
+    font-size: 24px;
+    width: calc(100% - 280px);
+    text-indent: 10px;
+}
+.textInputs input[type="file"]{
+    padding:5px;
+    border:none;
+    border-radius: 10px;
+    font-size: 24px;
+}
+.textInputs input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+
+
+
 .dataItem .change {
     background-image: url('../images/page-edit.219x256.png');
     background-size: cover;
@@ -157,34 +198,44 @@ body {
     height: 35px;
     top: 10%;
     right: 35%;
+    display: inline ;
+    text-align: left;
 }
 
 /* data change inputs and buttons */
-.dataItem .save {
-    background-color: green;
+.dataItem .save,
+.dataItem .cancel {
+    display: inline ;
     cursor: pointer;
     position: absolute;
-    width: 5%;
-    height: 5%;
-    bottom: 5%;
-    right: 50%;
-    
+    text-align: left; 
+    padding: 5px 10px;
+    bottom: 2%;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    color: white;
+}
+.dataItem .save {
+    background-color: #abd353;
+    right: 5%;  
+}
+.dataItem .save:hover {
+    color: #abd353;
+    background-color: white;
 }
 .dataItem .cancel {
-    background-color: red;
-    cursor: pointer;
-    position: absolute;
-    width: 5%;
-    height: 5%;
-    bottom: 5%;
-    right: 40%;
+    background-color: #d3536a;
+    right: 15%;
 }
+.dataItem .cancel:hover {
+    color:#d3536a;
+    background-color: white;
+}
+/* data change inputs and buttons end */
 
-#data .dataItem .photo.changingPhoto {
-    height: auto;
-    width: auto;
-    border-radius: 0;
-}
-#data .dataItem .textInputs {
-    
+
+
+#data .hidden {
+    display: none;
 }

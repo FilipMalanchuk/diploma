@@ -265,6 +265,28 @@ function updateDataFromServer(id,changePhoto){
 }
 
 
+// поиск по данным
+let searchButton = document.querySelector(".searchButton");
+searchButton.addEventListener("click",(event)=>{
+    let searchResult = [];
+    let imagesArray = {imagesBase64:[]};
+    console.log("searching")
+    let textSearch = document.querySelector(".textSearch input").value
+    if (textSearch === "") {addElements(dataFromServer)}
+    for(let i = 0;i<dataFromServer.length-1;i++){
+        if(dataFromServer[i].jobTitle[0].includes(`${textSearch}`) ||
+           dataFromServer[i].name.includes(`${textSearch}`) ||
+           dataFromServer[i].surname.includes(`${textSearch}`) ||
+           dataFromServer[i].patronymic.includes(`${textSearch}`))
+            {
+                searchResult.push(dataFromServer[i]);
+                imagesArray.imagesBase64.push(dataFromServer[dataFromServer.length-1].imagesBase64[i]);
+        }
+    }
+    searchResult.push(imagesArray)
+    console.log(searchResult)
+    addElements(searchResult)
+})
 
 
 

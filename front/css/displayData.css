@@ -138,9 +138,10 @@ body {
     right: 5px;
 }
 .dataItem.parentExpanded {
+    display: flex !important;
     width:100%;
     max-width: 1280px;
-    height: 600px;
+    min-height: 600px;
     position: absolute;
     z-index: 1;
     transition: 0.5s;
@@ -204,7 +205,8 @@ body {
 
 /* data change inputs and buttons */
 .dataItem .save,
-.dataItem .cancel {
+.dataItem .cancel,
+.dataItem .removeFromDB {
     display: inline ;
     cursor: pointer;
     position: absolute;
@@ -233,7 +235,17 @@ body {
     background-color: white;
 }
 /* data change inputs and buttons end */
-
+.dataItem .removeFromDB {
+    background-color: #d3536a;
+    left: 0;
+    padding: 2px;
+    bottom: 0;
+    font-size: 16px;
+}
+.dataItem .removeFromDB:hover {
+    color:#d3536a;
+    background-color: white;
+}
 
 
 #data .hidden {

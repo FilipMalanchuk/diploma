@@ -69,6 +69,7 @@ function addEvents(){
     document.querySelectorAll(".close").forEach(item => item.addEventListener("click",(event)=> {
         close(event)
     }))  
+    
 
     document.querySelectorAll(".change").forEach(item => item.addEventListener("click", (event)=> {
         let elemTarget = event.target;
@@ -87,6 +88,9 @@ function expand(event) {
     elemTarget.classList.add("hidden");
     parent.classList.add("parentExpanded");
     addRemoveHidden("remove",parent);
+
+    // прячем все остальные датаитемы
+    hideShowDataItems("add");
 }
 // закрытие открытого профиля
 function close(event) {
@@ -99,6 +103,9 @@ function close(event) {
     elemTarget.classList.add("hidden");
     parent.classList.remove("parentExpanded");
     addRemoveHidden("add",parent);
+
+    // показываем все остальные датаитемы
+    hideShowDataItems("show");
 }
 
 // отображает скрытые данные
@@ -131,11 +138,12 @@ function swapToInputs (parent,target) {
     <div class="address"><span>Адреса</span> <input type="text" value="${d.address}"></div>
     <div class="photo changingPhoto"><span>Фото</span> <input type="file" accept="image/png, image/jpeg"> <input type="checkbox" class="changePhoto"></div>
     <div class="additional"><span>Додаткові дані</span> <input type="textarea" value="${d.additional}"></div>`;
-    inputs+="<span class='save'>Зберігти</span> <span class='cancel'>Відмінити</span>"
+    inputs+="<span class='save'>Зберігти</span> <span class='cancel'>Відмінити</span> <span class='removeFromDB'>Видалити з бази</span>"
     
     parent.innerHTML = inputs
     parent.querySelector(".save").addEventListener('click',(event) => saveNewData(parent,d,id))
     parent.querySelector(".cancel").addEventListener('click',event => cancel(parent))
+    parent.querySelector(".removeFromDB").addEventListener('click',event => removeFromDB(event,id))
     
 }
 
@@ -288,7 +296,29 @@ searchButton.addEventListener("click",(event)=>{
     addElements(searchResult)
 })
 
-
+function hideShowDataItems(command){
+    let dataItems = document.querySelectorAll(".dataItem");
+    dataItems.forEach((item) => {
+        if (command === "add") {  
+        item.classList.add("hidden")
+        } else {   
+        item.classList.remove("hidden")
+        }
+    })
+}
+// удаляем из БД запись
+async function removeFromDB(event,_id) {
+    let body = {_id: `${_id}`};
+    console.log(body)
+    fetch("http://localhost:3000/deletingDataItem",{
+        method : "post",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(body)
+    }).then(res => console.log(res));
+}
 
 
 

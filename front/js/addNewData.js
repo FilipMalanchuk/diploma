@@ -1,4 +1,4 @@
-let inputSubmit = document.getElementById("sendFormButton");
+let inputSubmit = document.querySelector(".save");
 
 let data = {};
 

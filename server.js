@@ -74,6 +74,13 @@ app.get(['/','/index.html'],async (request,response) => {
     response.status(200).json({result:"changed"})
    
   });
+  // получаем пост с запросом на удаление записи
+  app.post(['/deletingDataItem'],async (request,response) => {
+    console.log("revieved request to delete DataItem")
+    let idToSend = request.body._id
+    //TODO
+    response.status(200).json({result:"deleted"})
+  });
 
   // получаем запрос на вывод данных
   app.get(['/showData'],async (request,response) => {

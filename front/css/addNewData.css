@@ -1,3 +1,122 @@
-body {
-    background-color: purple;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
+
+body {
+    background-color:#f9ffea ;
+    font-size: 20px;
+}
+.wrapper {
+    width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+
+/* start of header */
+.header {
+    background-color: #e9ffb2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    padding: 5px 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.nav a {
+    text-decoration: none;
+    color:black;
+    padding: 5px;
+}
+.nav a:hover {
+    color: #e9ffb2 ;
+    background-color: #acd052;
+}
+
+.header .decorate {
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+/* end of header */
+
+.main h3 {
+    text-align: center;
+    padding: 10px;
+    font-size: 28px;
+    background-color: #e9ffb2;
+    margin-bottom: 10px;
+}
+
+.textInputs {
+    font-size: 24px;
+    background-color: #e9ffb2;
+    position: relative;
+    min-height: 600px;
+}
+.textInputs span {
+    display: inline-block;
+    width:275px;
+    text-align: right;
+    padding-right:5px
+}
+.textInputs div {
+    padding: 5px;
+}
+.textInputs input[type="text"],
+.textInputs input[type="textarea"]{
+    padding:5px;
+    border:none;
+    border-radius: 10px;
+    font-size: 24px;
+    width: calc(100% - 280px);
+    text-indent: 10px;
+}
+.textInputs input[type="file"]{
+    padding:5px;
+    border:none;
+    border-radius: 10px;
+    font-size: 24px;
+}
+.textInputs input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+
+.main .save,
+.main .cancel {
+    display: inline ;
+    cursor: pointer;
+    position: absolute;
+    text-align: left; 
+    padding: 5px 10px;
+    bottom: 2%;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    color: white;
+}
+.main .save {
+    background-color: #abd353;
+    right: 5%;  
+}
+.main .save:hover {
+    color: #abd353;
+    background-color: white;
+}
+.main .cancel {
+    background-color: #d3536a;
+    right: 15%;
+}
+.main .cancel:hover {
+    color:#d3536a;
+    background-color: white;
+}
+
+
+

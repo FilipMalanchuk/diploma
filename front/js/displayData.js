@@ -1,20 +1,22 @@
 let dataFromServer = [];
 let idOfChange = "";
 let DataToChangeTo = {};
-
+let numberOfPages = 1;
+let currentPage = 1;
+let MaxPhotoSize = 2000000//16000000
 
 // получаем данные с БД
-async function getData() {
-    await fetch("http://localhost:3000/showData")
+async function getData(page) {
+    await fetch(`http://localhost:3000/showData/?page=${page}`)
     .then(response => response.json())
     .then(data => {
         dataFromServer = JSON.parse(JSON.stringify(data));
         console.log(data)
+        numberOfPages = Math.ceil(data[data.length - 1].numberOfDocuments / 10);
         addElements(data)    
-    })
-   
-    
-}
+    })   
+}  
+
 // добавление элементов на страницу из json данных
 function addElements(data){
     let strToAdd = ``;
@@ -53,7 +55,13 @@ function addElements(data){
         strToAdd+=`</div>` // конец
     }
 
+
     document.getElementById("data").innerHTML = strToAdd;
+    let strToPages = ""
+    for(let i = 1; i <= numberOfPages;i++){
+        strToPages += `<div class="page" value="${i}">${i}</div>`   
+    }
+    document.getElementById("pages").innerHTML = strToPages;
     
     // вызываем добавление ивентов для новых элементов
     addEvents();
@@ -75,6 +83,12 @@ function addEvents(){
         let elemTarget = event.target;
         let parent = event.target.parentElement;
         swapToInputs(parent,elemTarget);
+    }))
+    document.querySelectorAll(".page").forEach(item => item.addEventListener("click", (event)=>{
+        let value = item.getAttribute("value");
+        clearMain()
+        getData(value)
+        currentPage = value;
     }))
 }
  // открытие конкретного профиля на весь экран
@@ -196,7 +210,7 @@ function checkAllInputs(parent){
             dataGood = false;
         } else {
             photo.style.border = "red solid 0px"
-            if (photoInput.files[0].size > 16000000) {
+            if (photoInput.files[0].size > MaxPhotoSize) {
                 alert("File is too big!");
                 photoInput.value = "";
                 dataGood = false;
@@ -320,8 +334,10 @@ async function removeFromDB(event,_id) {
     }).then(res => console.log(res));
 }
 
+function clearMain(){
+    document.getElementById("pages").innerHTML = ""
+    document.getElementById("data").innerHTML = ""
+}
 
 
-
-getData()
-
+getData(currentPage)

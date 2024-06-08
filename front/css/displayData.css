@@ -251,3 +251,21 @@ body {
 #data .hidden {
     display: none;
 }
+
+
+/* pages */
+#pages {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#pages .page {
+    border:1px solid black;
+    background-color: white;
+    padding: 5px;
+    font-size: 20px;
+    cursor:pointer;
+    margin:10px;
+    margin-bottom: 20px;
+
+}

@@ -8,7 +8,8 @@ const DBconnect = require("./DB/DBconnect");
 const bodyParser = require("body-parser");
 const saveToDB = require("./DB/saveToDB");
 const getData = require("./DB/getDataFromDB");
-const update = require("./DB/changeData")
+const update = require("./DB/changeData");
+const getPageData = require("./DB/getPageData");
 
 
 // переменные
@@ -83,13 +84,24 @@ app.get(['/','/index.html'],async (request,response) => {
   });
 
   // получаем запрос на вывод данных
-  app.get(['/showData'],async (request,response) => {
+  // app.get(['/showData'],async (request,response) => {
+  //   try {
+  //     response.status(200).json(await getData.getAllData());
+  //   } catch (error) {
+  //     response.status(500).json({error:"error, data not recieved"})
+  //   }
+  // });
+
+  app.get(['/showData/?*'],async (request,response) => {
+    let requestString = request.originalUrl.slice(request.originalUrl.indexOf("?") +"?".length) // стока запроса
+    let pageNeeded = request.originalUrl.slice(request.originalUrl.indexOf("page=") +"page=".length).split("&")[0] // конкретная страница запроса
     try {
-      response.status(200).json(await getData.getAllData());
+      response.status(200).json(await getPageData.getPageData(pageNeeded));
     } catch (error) {
       response.status(500).json({error:"error, data not recieved"})
     }
   });
+
 
 
 

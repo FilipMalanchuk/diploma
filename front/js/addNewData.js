@@ -79,7 +79,15 @@ function sendData (data) {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify(data)
-    });
+    }).then(response=>{console.log(response)});
+    clearInputs();
 }
 // проверка на числа
 function isnum (val){return /^\d+$/.test(val);} 
+
+function clearInputs(){
+    let inputsNames = ['name','surname','patronymic','jobTitle','phoneNumber','payment','dateOfJobStart','photo','email','address','additional']
+    inputsNames.forEach((item)=>{
+        document.querySelector(`.${item} input`).value = ""
+    })
+}

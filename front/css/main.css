@@ -3,8 +3,87 @@
     padding: 0;
     margin: 0;
 }
-body {
-    background-color: red;
-    width: 100%;
+html,body {
     height: 100%;
+}
+body {
+    background-color: #f9ffea;
+    font-size: 20px;
+}
+.wrapper {
+    width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+/* start of header */
+.header {
+    background-color: #e9ffb2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.nav a {
+    text-decoration: none;
+    color:black;
+    padding: 5px;
+}
+.nav a:hover {
+    color: #e9ffb2 ;
+    background-color: #acd052;
+}
+.logMenu p {
+    padding: 5px;
+    display: flex;
+}
+.header .decorate {
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+/* end of header */
+
+.main {
+    height: calc(100vh - 50px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logInBox {
+    background-color: #e9ffb2;
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    border: 1px solid gray;
+}
+.login,
+.password {
+    width: 250px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 15px;
+    border:1px gray solid;
+}
+
+.logInButton {
+    text-decoration: none;
+    color:black;
+    padding: 5px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.logInButton:hover {
+    color: #e9ffb2 ;
+    background-color: #acd052;
 }

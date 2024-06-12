@@ -10,6 +10,8 @@ const saveToDB = require("./DB/saveToDB");
 const getData = require("./DB/getDataFromDB");
 const update = require("./DB/changeData");
 const getPageData = require("./DB/getPageData");
+const deleteData = require("./DB/deleteData");
+const getSearchData = require("./DB/getSearchData");
 
 
 // переменные
@@ -65,6 +67,7 @@ app.get(['/','/index.html'],async (request,response) => {
   app.post(['/addingNewData'],async (request,response) => {
     console.log(request.body)
     saveToDB.saveNewDataToDB(request.body)
+    response.status(200).json({result:"data added"})
   });
   // получаем пост запрос с обновлением существующей записи
   app.post(['/changingData'],async (request,response) => {
@@ -79,7 +82,7 @@ app.get(['/','/index.html'],async (request,response) => {
   app.post(['/deletingDataItem'],async (request,response) => {
     console.log("revieved request to delete DataItem")
     let idToSend = request.body._id
-    //TODO
+    deleteData.deleteOne(idToSend)
     response.status(200).json({result:"deleted"})
   });
 
@@ -95,11 +98,21 @@ app.get(['/','/index.html'],async (request,response) => {
   app.get(['/showData/?*'],async (request,response) => {
     let requestString = request.originalUrl.slice(request.originalUrl.indexOf("?") +"?".length) // стока запроса
     let pageNeeded = request.originalUrl.slice(request.originalUrl.indexOf("page=") +"page=".length).split("&")[0] // конкретная страница запроса
-    try {
-      response.status(200).json(await getPageData.getPageData(pageNeeded));
-    } catch (error) {
-      response.status(500).json({error:"error, data not recieved"})
+    if (!requestString.includes("nameOrjobTitle=")) { // если нужна только страница без поиска
+      try {
+        response.status(200).json(await getPageData.getPageData(pageNeeded));
+      } catch (error) {
+        response.status(500).json({error:"error, data not recieved"})
+      }
+    } else {
+        try {
+          
+          response.status(200).json(await getSearchData.getSearchData(requestString));
+        } catch (error) {
+          response.status(500).json({error:"error, data not recieved"})
+        }
     }
+
   });
 
 

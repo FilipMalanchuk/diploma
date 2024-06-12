@@ -110,6 +110,7 @@ body {
 }
 .dataItem > * {
     padding-top: 10px;
+    text-align: center;
 }
 .dataItem .wholeName {
     text-align: center;

@@ -2,12 +2,12 @@ let dataFromServer = [];
 let idOfChange = "";
 let DataToChangeTo = {};
 let numberOfPages = 1;
-let currentPage = 1;
 let MaxPhotoSize = 2000000//16000000
+let requestString = "page=1"
 
 // получаем данные с БД
-async function getData(page) {
-    await fetch(`http://localhost:3000/showData/?page=${page}`)
+async function getData(requestStr) {
+    await fetch(`http://localhost:3000/showData/?${requestStr}`)
     .then(response => response.json())
     .then(data => {
         dataFromServer = JSON.parse(JSON.stringify(data));
@@ -65,6 +65,9 @@ function addElements(data){
     
     // вызываем добавление ивентов для новых элементов
     addEvents();
+    if (data[data.length-1].numberOfDocuments === 0) {
+        displayNoData();
+    }
 }
 
 function addEvents(){
@@ -87,8 +90,8 @@ function addEvents(){
     document.querySelectorAll(".page").forEach(item => item.addEventListener("click", (event)=>{
         let value = item.getAttribute("value");
         clearMain()
-        getData(value)
-        currentPage = value;
+        setCurrentPage(value)
+        getData(requestString)
     }))
 }
  // открытие конкретного профиля на весь экран
@@ -290,26 +293,16 @@ function updateDataFromServer(id,changePhoto){
 // поиск по данным
 let searchButton = document.querySelector(".searchButton");
 searchButton.addEventListener("click",(event)=>{
-    let searchResult = [];
-    let imagesArray = {imagesBase64:[]};
-    console.log("searching")
     let textSearch = document.querySelector(".textSearch input").value
-    if (textSearch === "") {addElements(dataFromServer)}
-    for(let i = 0;i<dataFromServer.length-1;i++){
-        if(dataFromServer[i].jobTitle[0].includes(`${textSearch}`) ||
-           dataFromServer[i].name.includes(`${textSearch}`) ||
-           dataFromServer[i].surname.includes(`${textSearch}`) ||
-           dataFromServer[i].patronymic.includes(`${textSearch}`))
-            {
-                searchResult.push(dataFromServer[i]);
-                imagesArray.imagesBase64.push(dataFromServer[dataFromServer.length-1].imagesBase64[i]);
-        }
-    }
-    searchResult.push(imagesArray)
-    console.log(searchResult)
-    addElements(searchResult)
-})
+    if (textSearch === "") {clearSearchOptionsFromRequest(),setCurrentPage(1),clearMain(),getData(requestString); return} // если очистили поле и надо отобразить опять новые данные
+    clearSearchOptionsFromRequest(),setCurrentPage(1),clearMain()
+    addSearchToRequestString("&nameOrjobTitle="+encode(textSearch))
+    getData(requestString)
 
+
+
+})
+// отобразить или спрятать элементы
 function hideShowDataItems(command){
     let dataItems = document.querySelectorAll(".dataItem");
     dataItems.forEach((item) => {
@@ -323,7 +316,6 @@ function hideShowDataItems(command){
 // удаляем из БД запись
 async function removeFromDB(event,_id) {
     let body = {_id: `${_id}`};
-    console.log(body)
     fetch("http://localhost:3000/deletingDataItem",{
         method : "post",
         headers: {
@@ -331,13 +323,42 @@ async function removeFromDB(event,_id) {
             "Content-Type" : "application/json"
         },
         body : JSON.stringify(body)
-    }).then(res => console.log(res));
+    }).then(res => console.log(res),clearMain(),getData(requestString));
 }
-
+// очистка Main
 function clearMain(){
     document.getElementById("pages").innerHTML = ""
     document.getElementById("data").innerHTML = ""
 }
+function displayNoData(){
+    document.getElementById("pages").innerHTML = ""
+    document.getElementById("data").innerHTML = `<div class="noData">Даних немає</div>`
+}
 
 
-getData(currentPage)
+// функции управления requestString
+function getCurrentPage(){
+    return requestString.slice(requestString.indexOf("page=") +"page=".length).split("&")[0]
+}
+function setCurrentPage(number){
+    requestString = requestString.replace(getCurrentPage(),number+"")
+}
+function clearSearchOptionsFromRequest() {
+    requestString = requestString.split("&")[0]
+}
+function encode(str){
+    return encodeURI(str)
+}
+function decode(str){
+    return decodeURI(str)
+}
+function addSearchToRequestString(str){
+    console.log(requestString)
+    requestString = requestString+str
+    console.log(requestString)
+}
+
+
+
+// запуск первичный
+getData(requestString)
